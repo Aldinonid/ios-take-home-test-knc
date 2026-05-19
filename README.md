@@ -1,7 +1,15 @@
 # Task Explorer
 
-Task Explorer is a simple iOS application built using SwiftUI and MVVM architecture.
-The app fetches tasks from a remote API, supports local persistence for completion states, and demonstrates clean architecture principles with Repository Pattern and Dependency Injection.
+Task Explorer is a simple iOS application built using SwiftUI and MVVM architecture.  
+The app fetches tasks from a remote API, supports local persistence for completion states, and demonstrates clean architecture principles using the Repository Pattern and Dependency Injection.
+
+---
+
+# Running the Project
+
+1. Clone the repository
+2. Open the Xcode project
+3. Run the app on iOS 16+ simulator or device
 
 ---
 
@@ -16,6 +24,7 @@ The app fetches tasks from a remote API, supports local persistence for completi
 - Loading state handling
 - SwiftUI Preview support with mock dependencies
 - Unit Testing with mock repository
+- Lightweight data limiting for better UI responsiveness
 
 ---
 
@@ -53,43 +62,6 @@ Repository
 Remote / Local Data Source
 ```
 
----
-
-# Project Structure
-
-```text
-TaskExplorer
-├── Core
-│   ├── Networking
-│   │   ├── APIEndpoint.swift
-│   │   ├── HTTPMethod.swift
-│   │   ├── NetworkError.swift
-│   │   ├── NetworkService.swift
-│   │   └── URLSessionNetworkService.swift
-│   │
-│   └── Common
-│       └── ErrorView.swift
-│
-├── Features
-│   └── Task
-│       ├── List
-│       │   ├── Views
-│       │   └── ViewModels
-│       │
-│       ├── Detail
-│       │   └── Views
-│       │
-│       ├── Models
-│       ├── Repository
-│       └── Persistence
-│
-└── Tests
-    ├── Mocks
-    └── ViewModels
-```
-
----
-
 # API
 
 The app uses the following endpoint:
@@ -100,11 +72,24 @@ https://jsonplaceholder.typicode.com/todos
 
 ---
 
+# Data Fetching Strategy
+
+For demo simplicity and better UI responsiveness, the application limits fetched tasks to the first 20 items.
+
+This keeps:
+- Initial loading lightweight
+- UI rendering faster
+- Demo behavior more realistic
+
+The limiting is handled inside the Repository layer.
+
+---
+
 # Local Persistence Strategy
 
 Task completion updates are persisted locally using UserDefaults.
 
-Only completion overrides are stored locally instead of storing the entire task list.
+Instead of storing the full task list locally, the app only stores completion overrides.
 
 ## Stored Format
 
@@ -121,47 +106,18 @@ Example:
 ]
 ```
 
-This approach keeps local storage lightweight and simple.
+This approach keeps local storage lightweight and simple while still supporting persistent completion states.
 
 ---
 
 # Networking Layer
 
-The networking layer is intentionally kept simple and reusable.
+The networking layer is intentionally kept lightweight and reusable.
 
 ## Components
 
 - APIEndpoint
-- HTTPMethod
-- NetworkError
-- NetworkService Protocol
-- URLSessionNetworkService
-
-## Responsibilities
-
-### NetworkService
-
-Responsible for:
-
-- Executing HTTP requests
-- Decoding API responses
-
-### Repository
-
-Responsible for:
-
-- Fetching remote data
-- Loading local completion states
-- Merging remote and local data
-- Exposing domain models to ViewModels
-
-### ViewModel
-
-Responsible for:
-
-- UI state management
-- Handling user interactions
-- Calling repository methods
+- NetworkService Protocol & Implementation
 
 ---
 
@@ -185,18 +141,6 @@ This improves:
 
 ---
 
-# SwiftUI State Management
-
-The app uses:
-
-- @StateObject for ViewModels
-- @Binding for task synchronization between list and detail screen
-- @Published for reactive UI updates
-
-Task detail updates automatically reflect in the list using Binding.
-
----
-
 # Error Handling
 
 The app includes:
@@ -205,7 +149,7 @@ The app includes:
 - Error state
 - Retry mechanism
 
-A reusable ErrorView component is used for iOS 16 compatibility.
+A reusable `ErrorView` component is used for iOS 16 compatibility.
 
 ---
 
@@ -217,7 +161,10 @@ Unit tests are implemented using XCTest.
 
 - Fetch task success
 - Fetch task failure
+- Empty task result
 - Toggle completion update
+- Invalid task toggle handling
+- Error recovery flow
 
 ## Mocking Strategy
 
@@ -232,24 +179,6 @@ This ensures:
 - Isolated tests
 - Deterministic behavior
 - No real networking dependency
-
----
-
-# Preview Strategy
-
-SwiftUI previews use mock repositories instead of real services.
-
-Example:
-
-```swift
-#Preview {
-    TaskListView(
-        vm: TaskListViewModel(
-            repository: MockTaskRepository()
-        )
-    )
-}
-```
 
 ---
 
@@ -270,7 +199,7 @@ Since the application only needs lightweight local persistence for completion st
 - Faster development
 - Sufficient functionality for current requirements
 
-CoreData would be more suitable if:
+CoreData or SwiftData would be more suitable if:
 
 - Full offline support was required
 - CRUD operations became more complex
@@ -283,24 +212,59 @@ CoreData would be more suitable if:
 Potential future improvements:
 
 - Full offline cache support
-- Pagination
+- Pagination / infinite scrolling
 - Search & filtering
 - Dependency container
 - Snapshot testing
 - Persistent local database using CoreData or SwiftData
 - Better synchronization strategy
+- Pull-to-refresh support
+
+# AI Usage Report
+## AI Tools Used
+- ChatGPT
 
 ---
 
-# Running the Project
+## Tasks Assisted by AI
 
-1. Clone the repository
-2. Open the Xcode project
-3. Run the app on iOS 16+ simulator or device
+AI tools were used to assist with:
+
+- Brainstorming project architecture
+- Reviewing MVVM + Repository structure
+- Discussing folder organization
+- Reviewing dependency injection approach
+- Refining networking layer structure
+- Reviewing persistence strategy using UserDefaults
+- Generating and refining README documentation
+- Suggesting unit test scenarios
+- Debugging Swift concurrency and async/await related issues
+- Improving code readability and naming consistency
 
 ---
 
-# Author
+## Decisions Made Manually
 
-Aldino Efendi
+The following decisions were made manually during implementation:
 
+- Choosing MVVM + Repository architecture
+- Choosing feature-based folder structure
+- Deciding to use UserDefaults instead of CoreData
+- Designing task completion persistence strategy
+- Deciding to limit fetched data to improve responsiveness
+- Implementing SwiftUI view hierarchy and navigation flow
+- Structuring ViewModel responsibilities and state handling
+- Writing and adjusting application logic
+- Deciding the level of architectural complexity appropriate for the project scope
+
+---
+
+## Limitations and Corrections Applied
+
+Several AI suggestions were reviewed and adjusted manually during development:
+
+- Some architecture suggestions were intentionally simplified to avoid overengineering for a small take-home project
+- Swift 6 concurrency and Sendable recommendations were partially adjusted to better fit the project scope and avoid unnecessary complexity
+- Certain async testing suggestions were simplified to keep unit tests stable and maintainable
+- Networking abstraction was kept intentionally lightweight instead of introducing additional layers or containers
+- AI-generated code and recommendations were manually reviewed, tested, and modified before integration
