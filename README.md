@@ -5,6 +5,17 @@ The app fetches tasks from a remote API, supports local persistence for completi
 
 ---
 
+## Screenshots
+
+### Task List
+![Task List Screen](TaskExplorer/Resources/Screenshot1.png)
+
+### Task Detail
+![Task List Screen](TaskExplorer/Resources/Screenshot2.png)
+![Task List Screen](TaskExplorer/Resources/Screenshot3.png)
+
+---
+
 # Running the Project
 
 1. Clone the repository
