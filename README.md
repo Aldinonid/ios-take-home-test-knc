@@ -5,17 +5,6 @@ The app fetches tasks from a remote API, supports local persistence for completi
 
 ---
 
-## Screenshots
-
-### Task List
-![Task List Screen](TaskExplorer/Resources/Screenshot1.png)
-
-### Task Detail
-![Task List Screen](TaskExplorer/Resources/Screenshot2.png)
-![Task List Screen](TaskExplorer/Resources/Screenshot3.png)
-
----
-
 # Running the Project
 
 1. Clone the repository
@@ -279,3 +268,14 @@ Several AI suggestions were reviewed and adjusted manually during development:
 - Certain async testing suggestions were simplified to keep unit tests stable and maintainable
 - Networking abstraction was kept intentionally lightweight instead of introducing additional layers or containers
 - AI-generated code and recommendations were manually reviewed, tested, and modified before integration
+
+---
+
+## Screenshots
+
+### Task List
+<img src="TaskExplorer/Resources/Screenshot1.png" alt="Task List Screen" width="150">
+
+### Task Detail
+<img src="TaskExplorer/Resources/Screenshot2.png" alt="Task List Screen" width="150">
+<img src="TaskExplorer/Resources/Screenshot3.png" alt="Task List Screen" width="150">
