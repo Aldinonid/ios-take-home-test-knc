@@ -277,5 +277,7 @@ Several AI suggestions were reviewed and adjusted manually during development:
 <img src="TaskExplorer/Resources/Screenshot1.png" alt="Task List Screen" width="150">
 
 ### Task Detail
-<img src="TaskExplorer/Resources/Screenshot2.png" alt="Task List Screen" width="150">
-<img src="TaskExplorer/Resources/Screenshot3.png" alt="Task List Screen" width="150">
+<div>
+    <img src="TaskExplorer/Resources/Screenshot2.png" alt="Task List Screen" width="150">
+    <img src="TaskExplorer/Resources/Screenshot3.png" alt="Task List Screen" width="150">
+</div>
