@@ -10,6 +10,7 @@ import SwiftUI
 struct TaskDetailView: View {
     
     @Binding var task: TaskList
+    @State private var animateComplete: Bool = false
     let onToggle: () -> Void
     
     var body: some View {
@@ -18,15 +19,18 @@ struct TaskDetailView: View {
                 Text(task.title)
                     .font(.title2)
                     .fontWeight(.semibold)
+                    .strikethrough(task.completed)
+                    .foregroundStyle(task.completed ? .secondary : .primary)
+                    .animation(.easeIn, value: task.completed)
                 
                 HStack(spacing: 8) {
                     Circle()
                         .fill(task.completed ? .green : .gray)
                         .frame(width: 10, height: 10)
                     
-                    Text(task.completed ? "Compleded" : "Incomplete")
+                    Text(task.completed ? "Completed" : "Incomplete")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(task.completed ? .secondary : .primary)
                 }
                 
             }

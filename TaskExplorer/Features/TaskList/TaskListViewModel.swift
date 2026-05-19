@@ -65,7 +65,7 @@ extension TaskListViewModel {
         let repo = MockTaskRepository()
         let vm = TaskListViewModel(repository: repo)
         vm.isLoading = false
-        vm.tasks = [.mock(id: 1, completed: false),
+        vm.tasks = [.mock(id: 1, completed: true),
                     .mock(id: 2, completed: false)]
         return vm
     }

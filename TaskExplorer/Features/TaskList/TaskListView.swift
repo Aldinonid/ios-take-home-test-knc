@@ -63,6 +63,9 @@ struct TaskRowView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(task.title)
+                    .strikethrough(task.completed)
+                    .animation(.easeIn, value: task.completed)
+                    .foregroundStyle(task.completed ? .secondary : .primary)
             }
             
             Spacer()
