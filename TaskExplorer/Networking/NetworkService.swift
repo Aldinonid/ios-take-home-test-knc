@@ -1,14 +1,12 @@
 //
-//  BaseAPI.swift
+//  NetworkService.swift
 //  TaskExplorer
 //
-//  Created by Aldino Efendi on 2026/05/18.
+//  Created by Aldino Efendi on 2026/05/19.
 //
 
 import Foundation
-import Combine
 
-// MARK: - Enums
 enum NetworkError: Error {
     case invalidURL
     case invalidResponse
@@ -18,16 +16,12 @@ enum NetworkError: Error {
 }
 
 protocol NetworkService {
-    func request<T: Decodable>(
-        endpoint: APIEndpoint,
-        type: T.Type
-    ) async throws -> T
+    func request<T: Decodable>(endpoint: APIEndpoint) async throws -> T
 }
 
 final class URLSessionNetworkService: NetworkService {
     
-    
-    func request<T>(endpoint: any APIEndpoint, type: T.Type) async throws -> T where T : Decodable {
+    func request<T: Decodable>(endpoint: APIEndpoint) async throws -> T {
         guard let url = URL(string: endpoint.baseURL + endpoint.path) else {
             throw NetworkError.invalidURL
         }

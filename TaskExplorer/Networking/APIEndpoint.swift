@@ -11,6 +11,11 @@ protocol APIEndpoint {
     var method: HTTPMethod { get }
 }
 
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+}
+
 enum TaskEndpoint: APIEndpoint {
     case tasks
     
@@ -26,9 +31,4 @@ enum TaskEndpoint: APIEndpoint {
     }
     
     var method: HTTPMethod { .get }
-}
-
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
 }

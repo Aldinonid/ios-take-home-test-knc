@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaskList: Identifiable, Equatable, Codable {
+struct TaskList: Identifiable, Codable, Sendable {
     let id: Int
     let title: String
     var completed: Bool

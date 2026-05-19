@@ -31,12 +31,17 @@ struct TaskListView: View {
             } else {
                 List($vm.tasks) { $task in
                     NavigationLink {
-                        TaskDetailView(task: $task)
+                        TaskDetailView(
+                            task: $task,
+                            onToggle: {
+                                vm.toggleTask(task.id)
+                            }
+                        )
                     } label: {
                         TaskRowView(
                             task: task,
                             onToggle: {
-                                vm.toggleTaskCompletion(task)
+                                vm.toggleTask(task.id)
                             }
                         )
                     }
@@ -71,22 +76,15 @@ struct TaskRowView: View {
     }
 }
 
-final class MockTaskRepository: TaskListRepositoryProtocol {
-    
-    var tasks: [TaskList] = [
-        TaskList(id: 1, title: "Buy groceries", completed: false),
-        TaskList(id: 2, title: "Finish take home test", completed: true)
-    ]
-    
-    func fetchTasks() async throws -> [TaskList] { tasks }
-    
-    func updateTaskCompletion(_ taskId: Int, completed: Bool) throws {
-        
+
+#Preview("Success") {
+    NavigationStack {
+        TaskListView(vm: .successPreview())
     }
-    
 }
 
-
-#Preview {
-    TaskListView(vm: TaskListViewModel(repository: MockTaskRepository()))
+#Preview("Error State") {
+    NavigationStack {
+        TaskListView(vm: .errorPreview())        
+    }
 }

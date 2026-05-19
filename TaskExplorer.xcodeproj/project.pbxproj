@@ -29,14 +29,43 @@
 		A5E1A7AF2FBB659100A644AD /* TaskExplorerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskExplorerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A5E1A7F22FBB986800A644AD /* Exceptions for "TaskExplorer" folder in "TaskExplorerTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Features/TaskList/TaskListModel.swift,
+				Features/TaskList/TaskListRepository.swift,
+				Features/TaskList/TaskListViewModel.swift,
+				Networking/APIEndpoint.swift,
+				Networking/NetworkService.swift,
+				Persistence/UserDefaultsDataSource.swift,
+			);
+			target = A5E1A7A42FBB659100A644AD /* TaskExplorerTests */;
+		};
+		A5E1A80F2FBC48F700A644AD /* Exceptions for "TaskExplorerTests" folder in "TaskExplorer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/MockTaskRepository.swift,
+				Mocks/TaskListDummy.swift,
+			);
+			target = A5E1A7972FBB658E00A644AD /* TaskExplorer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A5E1A79A2FBB658E00A644AD /* TaskExplorer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A5E1A7F22FBB986800A644AD /* Exceptions for "TaskExplorer" folder in "TaskExplorerTests" target */,
+			);
 			path = TaskExplorer;
 			sourceTree = "<group>";
 		};
 		A5E1A7A82FBB659100A644AD /* TaskExplorerTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A5E1A80F2FBC48F700A644AD /* Exceptions for "TaskExplorerTests" folder in "TaskExplorer" target */,
+			);
 			path = TaskExplorerTests;
 			sourceTree = "<group>";
 		};
